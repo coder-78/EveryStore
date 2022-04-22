@@ -15,6 +15,13 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const [isLogin, setLogin] = useState("");
 
+  const [lUser, setLUser] = useState("");
+  const [lPass, setLPass] = useState("");
+  const [sName, setSName] = useState("");
+  const [sUser, setSUser] = useState("");
+  const [sPass, setSPass] = useState("");
+
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -28,7 +35,7 @@ const Header = () => {
             <Nav className="me-auto">
               <Nav.Link href="/">Shop</Nav.Link>
               <Nav.Link href="/cart">Cart</Nav.Link>
-              <Nav.Link href="/addProducts">Add Products</Nav.Link>
+              <Nav.Link>Add Products</Nav.Link>
             </Nav>
 
             <span>
@@ -83,25 +90,26 @@ const Header = () => {
                   <Row className="mb-3">
                     <Form.Group as={Col} controlId="validationCustom01">
                       <Form.Label>Name</Form.Label>
-                      <Form.Control type="text" placeholder="Name" />
+                      <Form.Control onChange={(e) => setSName(e.target.value)} type="text" placeholder="Name" />
                     </Form.Group>
                   </Row>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} controlId="validationCustom05">
                       <Form.Label>Username</Form.Label>
-                      <Form.Control type="text" placeholder="Username" />
+                      <Form.Control onChange={(e) => setSUser(e.target.value)} type="text" placeholder="Username" />
                     </Form.Group>
                   </Row>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} controlId="validationCustom05">
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" placeholder="Password" />
+                      <Form.Control onChange={(e) => setSPass(e.target.value)} type="password" placeholder="Password" />
                     </Form.Group>
                   </Row>
 
                   <Button
+                  disabled={sUser == "" || sPass == "" || sName == "" ? true : false}
                     onClick={() => {
                       sessionStorage.setItem("Login", true);
                       handleClose();
@@ -118,18 +126,19 @@ const Header = () => {
                   <Row className="mb-3">
                     <Form.Group as={Col} controlId="validationCustom01">
                       <Form.Label>Username</Form.Label>
-                      <Form.Control type="text" placeholder="Username" />
+                      <Form.Control onChange={(e) => setLUser(e.target.value)} type="text" placeholder="Username" />
                     </Form.Group>
                   </Row>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} controlId="validationCustom05">
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" placeholder="Password" />
+                      <Form.Control onChange={(e) => setLPass(e.target.value)} type="password" placeholder="Password" />
                     </Form.Group>
                   </Row>
 
                   <Button
+                  disabled={lUser == "" || lPass == "" ? true : false}
                     onClick={() => {
                       sessionStorage.setItem("Login", true);
                       handleClose();
