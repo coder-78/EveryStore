@@ -2,15 +2,20 @@ import React, {useEffect} from "react";
 import Header from "./Header";
 import "./MainStyle.css";
 import data from "./Products";
+import { connect } from "react-redux";
 
 import { Row, Col, Container, Button, Card, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+import {getProductData} from "./Action";
 
-  // useEffect(() => {
-  //   sessionStorage.setItem("Login", false)
-  // }, [])
+const Home = (props) => {
+
+  useEffect(() => {
+    props.getProductData();
+  }, []);
+
+
   return (
     <div>
       <Header />
@@ -19,9 +24,9 @@ const Home = () => {
         <Row>
           <Col lg="9">
             <div className="productStyle">
-              {data.map((v) => {
+              {props.productData.map((v, index) => {
                 return(
-                <Card style={{ width: "18rem" }} className="cardStyle">
+                <Card key={index} style={{ width: "18rem" }} className="cardStyle">
                   <Card.Img
                     variant="top"
                     height={300}
@@ -74,4 +79,14 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProductData: () => dispatch(getProductData())
+  }
+}
+
+const mapStateToProps = (state, ownProps) => ({
+  productData: state.UserReducer.productData,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
