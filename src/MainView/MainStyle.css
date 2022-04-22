@@ -1,0 +1,54 @@
+.headerStyle {
+    /* background-color: darkgray; */
+    /* height: 2cm; */
+    margin: 10px;
+    /* width: 100%; */
+    /* display: flex; */
+    /* justify-items: flex-start; */
+}
+
+.homeStyle {
+    margin-top: 80px;
+}
+
+.productStyle {
+    display: flex;
+    justify-content: space-evenly; 
+    flex:1;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.cardStyle {
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.listStyle {
+    /* top: 0; */
+    /* bottom:0; */
+    /* position:fixed; */
+    /* overflow-y:scroll; */
+    /* overflow-x:hidden; */
+}
+
+.cardTitle {
+    height: 50px;
+    width: auto;
+}
+
+.detailStyle {
+    margin: 35px;
+    /* display: flex; */
+}
+
+.spanStyle {
+    justify-content: space-evenly;
+}
+
+.modalStyle {
+    /* height: 50vh; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
