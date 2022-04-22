@@ -28,7 +28,7 @@ const Header = () => {
           <h1 style={{ color: "white", marginLeft: "10px" }}>Every Store</h1>
           <Container>
             <Nav className="me-auto">
-              <Nav.Link href="/shop">Shop</Nav.Link>
+              <Nav.Link href="/">Shop</Nav.Link>
               <Nav.Link href="/cart">Cart</Nav.Link>
               <Nav.Link href="/addProducts">Add Products</Nav.Link>
             </Nav>

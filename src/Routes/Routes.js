@@ -9,11 +9,11 @@ import Cart from "../MainView/Cart";
 export const routes = (
   <BrowserRouter>
     <Routes>
-      <Route path="/shop" element={<Home />}></Route>
+      <Route path="/" element={<Home />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/cart" element={<Cart />}></Route>
-      <Route path="/shop/product/:id" element={<ProductDetail />}></Route>
+      <Route path="/product/:id" element={<ProductDetail />}></Route>
     </Routes>
   </BrowserRouter>
 );
