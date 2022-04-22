@@ -12,12 +12,9 @@ const Cart = () => {
 
 
   const dataOrder = JSON.parse(sessionStorage.getItem("Order"));
-  console.log(dataOrder, "hhjj");
-
-  // var totalPrice;
   var totalPrice = !isEmpty(dataOrder) && dataOrder.map((y) => {
     return (
-      y.Price
+      y != null && y.Price
     )
   });
 
@@ -25,8 +22,11 @@ const Cart = () => {
     return total + value;
   }
 
-
-  // console.log(totalPrice.reduce(myFunction), "okkk")
+  const deleteFunction = (id) => {
+    delete dataOrder[id];
+    sessionStorage.setItem("Order", JSON.stringify(dataOrder));
+    window.location.reload();
+  }
 
 
   return (
@@ -40,17 +40,18 @@ const Cart = () => {
         <Row>
           <Col>
             {!isEmpty(dataOrder) &&
-              dataOrder.map((v) => {
+              dataOrder.map((v, index) => {
                 return (
                   <>
-                    <div>
+                    <div key={index}>
+                      {v != null &&
                       <Row>
                         <Col lg="1">
                           <Card style={{ width: "6rem" }} className="cardStyle">
                             <Card.Img variant="top" height={60} src={v.Image} />
                           </Card>
                         </Col>
-                        <Col lg="8">
+                        <Col lg="6">
                           <h4>{v.Name}</h4>
                           <Row>
                             <Col lg="2">
@@ -61,7 +62,12 @@ const Cart = () => {
                           </Col>
                           </Row>
                         </Col>
+                        <Col lg="4">
+                          <Button onClick={() => deleteFunction(index)}>Delete</Button>
+                        </Col>
+                        <hr/>
                       </Row>
+              }       
                     </div>
                   </>
                 );
@@ -69,15 +75,27 @@ const Cart = () => {
           </Col>
         </Row>
       </Container>
-      <hr/>
       <Container>
         <Row>
+          {isEmpty(dataOrder) ? 
+          <Col>
+          <h1>You don't have any products in your cart.</h1>
+          </Col>
+          :
+          <>
           <Col lg="4">
           <h2>Total Price: ${!isEmpty(totalPrice) && totalPrice.reduce(myFunction)}</h2>
           </Col>
 
-          <Col lg="4">
-          <Button onClick={() => handleShow()}>Place Order</Button>
+          <Col lg="3">
+          <Button onClick={() => {handleShow()}}>Place Order</Button>
+          </Col>
+          </>
+}
+          <Col lg="3">
+            <a href="http://localhost:3000/">
+          <Button>Continue Shopping</Button>
+          </a>
           </Col>
         </Row>
       </Container>

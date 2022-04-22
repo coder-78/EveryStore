@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, Card, Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Card, Container, Row, Col, Button, Form } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import Header from "./Header";
 import data from "./Products";
@@ -15,7 +15,6 @@ const ProductDetail = () => {
     var dataOrder = sessionStorage.getItem("Order");
     var array = [];
     array = isNull(dataOrder) ? [] : JSON.parse(dataOrder);
-    console.log(array, "arrayyyyy");
     const object = {
       Name: product.title,
       Image: product.image,
@@ -27,7 +26,6 @@ const ProductDetail = () => {
     sessionStorage.setItem("Order", JSON.stringify(array)); 
   };
 
-  // console.log(product.price * count, "array");
   return (
     <div>
       <Header />

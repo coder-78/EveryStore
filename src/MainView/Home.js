@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import Header from "./Header";
 import "./MainStyle.css";
-import data from "./Products";
 import { connect } from "react-redux";
 
 import { Row, Col, Container, Button, Card, ListGroup } from "react-bootstrap";
@@ -26,6 +25,7 @@ const Home = (props) => {
             <div className="productStyle">
               {props.productData.map((v, index) => {
                 return(
+                  <div>
                 <Card key={index} style={{ width: "18rem" }} className="cardStyle">
                   <Card.Img
                     variant="top"
@@ -33,17 +33,19 @@ const Home = (props) => {
                     src={v.image}
                   />
                   <Card.Body>
-                    <Link to={`product/${v.id}`}>
                     <Card.Title className="cardTitle">
                       {(v.title).slice(0, 35) + "..."}
                       </Card.Title>
-                    </Link>
                     <Card.Text>{v.price + "$"}</Card.Text>
+                    {(sessionStorage.getItem("Login") == null || sessionStorage.getItem("Login") == "false") ?
+                    <Button variant="primary" disabled>Add To Cart</Button> :
                     <Link to={`product/${v.id}`}>
                     <Button variant="primary">Add To Cart</Button>
                     </Link>
+                  }
                   </Card.Body>
                 </Card>
+                </div>
                 )
               })}
             </div>

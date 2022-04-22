@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Row,
-  Dropdown,
   Navbar,
   Nav,
   Container,
@@ -14,12 +13,11 @@ import "./MainStyle.css";
 
 const Header = () => {
   const [show, setShow] = useState(false);
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(isLogin, "jjjj");
 
   return (
     <>
@@ -34,10 +32,40 @@ const Header = () => {
             </Nav>
 
             <span>
-              <Nav className="me-auto">
-                <Nav.Link onClick={() => {handleShow(); sessionStorage.setItem("Login", false)}}>Login</Nav.Link>
-                <Nav.Link href="/signup">SignUp</Nav.Link>
-              </Nav>
+              {sessionStorage.getItem("Login") == "true" ? (
+                <>
+                  <Nav className="me-auto">
+                    <Nav.Link
+                      onClick={() => {
+                        sessionStorage.setItem("Login", false);
+                        window.location.reload();
+                      }}
+                    >
+                      Logout
+                    </Nav.Link>
+                  </Nav>
+                </>
+              ) : (
+                <Nav className="me-auto">
+                  <Nav.Link
+                    onClick={() => {
+                      handleShow();
+                      sessionStorage.setItem("Login", false);
+                      setLogin("Login");
+                    }}
+                  >
+                    Login
+                  </Nav.Link>
+                  <Nav.Link
+                    onClick={() => {
+                      handleShow();
+                      setLogin("Sign");
+                    }}
+                  >
+                    SignUp
+                  </Nav.Link>
+                </Nav>
+              )}
             </span>
           </Container>
         </Navbar>
@@ -45,34 +73,74 @@ const Header = () => {
         <div className="modalStyle">
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>LOGIN</Modal.Title>
+              <Modal.Title>
+                {isLogin == "Sign" ? "Signup" : "Login"}
+              </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="validationCustom01">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Username" />
-                  </Form.Group>
-                </Row>
+            {isLogin == "Sign" ? (
+              <Modal.Body>
+                <Form>
+                  <Row className="mb-3">
+                    <Form.Group as={Col} controlId="validationCustom01">
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control type="text" placeholder="Name" />
+                    </Form.Group>
+                  </Row>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="validationCustom05">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                  </Form.Group>
-                </Row>
+                  <Row className="mb-3">
+                    <Form.Group as={Col} controlId="validationCustom05">
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control type="text" placeholder="Username" />
+                    </Form.Group>
+                  </Row>
 
-                <Button
-                  onClick={() => {
-                    sessionStorage.setItem("Login", true)
-                    handleClose();
-                  }}
-                >
-                  Login
-                </Button>
-              </Form>
-            </Modal.Body>
+                  <Row className="mb-3">
+                    <Form.Group as={Col} controlId="validationCustom05">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control type="password" placeholder="Password" />
+                    </Form.Group>
+                  </Row>
+
+                  <Button
+                    onClick={() => {
+                      sessionStorage.setItem("Login", true);
+                      handleClose();
+                      window.location.reload();
+                    }}
+                  >
+                    Signup
+                  </Button>
+                </Form>
+              </Modal.Body>
+            ) : (
+              <Modal.Body>
+                <Form>
+                  <Row className="mb-3">
+                    <Form.Group as={Col} controlId="validationCustom01">
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control type="text" placeholder="Username" />
+                    </Form.Group>
+                  </Row>
+
+                  <Row className="mb-3">
+                    <Form.Group as={Col} controlId="validationCustom05">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control type="password" placeholder="Password" />
+                    </Form.Group>
+                  </Row>
+
+                  <Button
+                    onClick={() => {
+                      sessionStorage.setItem("Login", true);
+                      handleClose();
+                      window.location.reload();
+                    }}
+                  >
+                    Login
+                  </Button>
+                </Form>
+              </Modal.Body>
+            )}
           </Modal>
         </div>
       </div>
