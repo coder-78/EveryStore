@@ -93,7 +93,7 @@ const Cart = () => {
           </>
 }
           <Col lg="3">
-            <a href="http://localhost:3000/">
+            <a href="/">
           <Button>Continue Shopping</Button>
           </a>
           </Col>
