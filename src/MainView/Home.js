@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
-import Header from "./Header";
 import "./MainStyle.css";
 import { connect } from "react-redux";
+import data from "./Products";
+
 
 import { Row, Col, Container, Button, Card, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -17,13 +18,12 @@ const Home = (props) => {
 
   return (
     <div>
-      <Header />
 
       <Container fluid className="homeStyle">
         <Row>
           <Col lg="9">
             <div className="productStyle">
-              {props.productData.map((v, index) => {
+              {data.map((v, index) => {
                 return(
                   <div>
                 <Card key={index} style={{ width: "18rem" }} className="cardStyle">
@@ -37,12 +37,10 @@ const Home = (props) => {
                       {(v.title).slice(0, 35) + "..."}
                       </Card.Title>
                     <Card.Text>{v.price + "$"}</Card.Text>
-                    {(sessionStorage.getItem("Login") == null || sessionStorage.getItem("Login") == "false") ?
-                    <Button variant="primary" disabled>Add To Cart</Button> :
+
                     <Link to={`product/${v.id}`}>
                     <Button variant="primary">Add To Cart</Button>
                     </Link>
-                  }
                   </Card.Body>
                 </Card>
                 </div>
@@ -54,13 +52,13 @@ const Home = (props) => {
           <Col lg="3">
             <div className="listStyle">
               <ListGroup>
-                <ListGroup.Item action href="#link1">
+                <ListGroup.Item action href="/">
                   <h3>Categories</h3>
                 </ListGroup.Item>
-                <ListGroup.Item action href="#link2">
+                <ListGroup.Item action href="/">
                   Fruits
                 </ListGroup.Item>
-                <ListGroup.Item action href="#link2">
+                <ListGroup.Item action href="/">
                   Bags
                 </ListGroup.Item>
                 <ListGroup.Item action href="#link2">

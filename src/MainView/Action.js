@@ -1,3 +1,4 @@
+// import { data } from "autoprefixer";
 import axios from "axios";
 
 // Get Data
@@ -33,3 +34,24 @@ export const errorProductGetData = () => {
     type: "ERROR_PRODUCT_GET_DATA",
   };
 };
+
+
+export const saveData = (data) => {
+  return (dispatch) => {
+    dispatch(requestSaveData())
+    dispatch(successSaveData(data))
+  }  
+}
+
+export const requestSaveData = () => {
+  return {
+    type: "REQUEST_SAVE_DATA",
+  }
+}
+
+export const successSaveData = (data) => {
+  return {
+    type: "SUCCESS_SAVE_DATA",
+    payload: data,
+  }
+}

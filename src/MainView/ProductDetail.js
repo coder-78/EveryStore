@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Card, Container, Row, Col, Button, Form } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import Header from "./Header";
 import data from "./Products";
 import "./MainStyle.css";
 import { isNull } from "lodash";
 
 const ProductDetail = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const { id } = useParams();
   const product = data.find((v) => v.id == id);
 
@@ -28,7 +27,6 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <Header />
       <Container fluid className="detailStyle">
         <Row>
           <Col lg="4">
@@ -50,7 +48,7 @@ const ProductDetail = () => {
               <Col lg="1">
                 <Button
                   onClick={() => {
-                    count == 0 ? setCount(0) : setCount(count - 1);
+                    count == 1 ? setCount(1) : setCount(count - 1);
                   }}
                 >
                   -

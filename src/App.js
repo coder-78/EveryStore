@@ -1,10 +1,14 @@
 import './App.css';
 import { routes } from './Routes/Routes';
-import Home from './MainView/Home';
+import Header from './MainView/Header';
 
 function App() {
-  // <Home/>
-  return (routes);
+  return(
+    <>
+    <Header/>
+    {routes}
+    </>
+  );
 }
 
 export default App;
